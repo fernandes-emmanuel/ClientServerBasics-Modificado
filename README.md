@@ -1,9 +1,32 @@
-# ClientServerBasics (2.0)
-Starter code for the basic client-server assignment
+# Processador de Texto Remoto (Cliente/Servidor)
 
+Este projeto implementa um servidor de processamento de texto remoto com base no exemplo básico de Cliente-Servidor (Fig. 2.3). 
 
-Este template corresponde ao exemplo da Fig. 2.3 do livro. O exercício consiste em acrescentar funcionalidade ao servidor para torná-lo mais útil. Essa funcionalidade deve ser acessível aos clientes. Por exemplo, o servidor pode ser uma espécie de calculadora remota. O cliente passa dois valores numéricos, juntamente com o nome de uma operação (ex.: add, subtract, multiply, divide) e o servidor executa a operação respectiva e retorna seu resultado para o cliente. Você pode implementar um servidor com outras funcionalidades (diferente da calculadora). O imporante é que ele ofereça pelo menos três operações diferentes que os clientes podem utilizar remotamente, passando dados para serem processados e recebendo o resultado desse processamento como resposta.
+A aplicação permite que o cliente envie um texto (payload) e instrua o servidor a executar uma ou mais operações sobre ele. O servidor processa os dados solicitados e retorna a string processada.
 
-Tarefa individual.
+## Funcionalidades Disponíveis
 
-Incluir um Readme descritivo do sistema implementado.
+O servidor suporta quatro (4) operações básicas de manipulação de texto:
+- `UPPER`: Converte todo o texto para letras maiúsculas.
+- `LOWER`: Converte todo o texto para letras minúsculas.
+- `REVERSE`: Inverte a ordem dos caracteres do texto.
+- `VOWELS`: Filtra e retorna apenas as vogais presentes no texto (ignorando consoantes e espaços).
+
+## Encadeamento de Operações
+
+Uma das principais funcionalidades do sistema é a capacidade de **encadear múltiplas operações em uma única requisição**. O cliente pode enviar uma lista de comandos separados por vírgula. O servidor aplicará as transformações sequencialmente.
+
+**Exemplo de formato de requisição:**
+`COMANDO1,COMANDO2 texto_a_processar`
+
+Exemplos práticos suportados pelo cliente:
+- `UPPER hello, world` -> `HELLO, WORLD`
+- `REVERSE python is fun` -> `nuf si nohtyp`
+- `UPPER,REVERSE testes de rede` -> `EDER ED SETSET`
+- `VOWELS,UPPER sistemas distribuidos` -> `IEAIIUIO`
+
+## Como Executar
+
+1. Certifique-se de que o endereço de IP e porta estão corretamente configurados no arquivo `constCS.py`. Para rodar na mesma máquina, `HOST` está configurado como `'127.0.0.1'`.
+2. Em um terminal, inicie o servidor: `python server.py`
+3. Em outro terminal, inicie o cliente para rodar os casos de teste pré-definidos: `python client.py`
